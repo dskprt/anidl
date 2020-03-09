@@ -79,6 +79,7 @@
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Provider\Providers\AnimePaheProvider.cs" />
     <Compile Include="Utils\Anime.cs" />
+    <Compile Include="Utils\Base36Converter.cs" />
     <Compile Include="Utils\HttpUtils.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Views\AnimeListView.xaml.cs">
