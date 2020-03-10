@@ -32,7 +32,7 @@ namespace anidl.Views {
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            Settings.provider = provider.Text;
+            Settings.provider = provider.SelectedValue.ToString();
         }
     }
 }

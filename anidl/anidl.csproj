@@ -85,6 +85,9 @@
     <Compile Include="Views\AnimeListView.xaml.cs">
       <DependentUpon>AnimeListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DownloaderView.xaml.cs">
+      <DependentUpon>DownloaderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DownloadView.xaml.cs">
       <DependentUpon>DownloadView.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AnimeListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DownloaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

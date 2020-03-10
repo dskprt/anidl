@@ -48,14 +48,32 @@ namespace anidl.Views {
         }
 
         private void DLAll_Click(object sender, RoutedEventArgs e) {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
             foreach(Item item in this.episodes.Items) {
-                provider.Download(item.URL);
+                dict.Add(string.Format("{0} #{1}{2}", item.Anime, item.Number, (string.IsNullOrWhiteSpace(item.Title)) ? "" : item.Title),
+                    item.URL);
+            }
+
+            foreach (Window window in Application.Current.Windows) {
+                if (window.GetType() == typeof(MainWindow)) {
+                    (window as MainWindow).MainContentControl.Content = new DownloaderView(dict);
+                }
             }
         }
 
         private void DLChecked_Click(object sender, RoutedEventArgs e) {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
             foreach (Item item in this.checkedItems) {
-                provider.Download(item.URL);
+                dict.Add(string.Format("{0} #{1}{2}", item.Anime, item.Number, (string.IsNullOrWhiteSpace(item.Title)) ? "" : item.Title),
+                    item.URL);
+            }
+
+            foreach (Window window in Application.Current.Windows) {
+                if (window.GetType() == typeof(MainWindow)) {
+                    (window as MainWindow).MainContentControl.Content = new DownloaderView(dict);
+                }
             }
         }
 

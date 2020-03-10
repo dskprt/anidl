@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,9 @@ namespace anidl.Views {
         }
 
         private void Search_Click(object sender, RoutedEventArgs e) {
-            Provider.Provider provider = Provider.Provider.GetProviderByName(anidl.Utils.Settings.provider);
+            Provider.Provider provider = Provider.Provider.GetProviderByName(Utils.Settings.provider);
+
+            Debug.WriteLine(Utils.Settings.provider);
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
