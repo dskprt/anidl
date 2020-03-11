@@ -37,5 +37,9 @@ namespace anidl.Utils {
                 reader.Close();
             }
         }
+
+        public static void DownloadStream(string[] urls) {
+
+        }
     }
 }

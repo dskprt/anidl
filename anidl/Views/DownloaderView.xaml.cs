@@ -20,8 +20,14 @@ namespace anidl.Views {
     /// </summary>
     public partial class DownloaderView : UserControl {
 
+        private Provider.Provider provider = Provider.Provider.GetProviderByName(Settings.provider);
+
         public DownloaderView(Dictionary<string, string> toDownload) {
             InitializeComponent();
+
+            foreach(var item in toDownload) {
+                provider.Download(item.Value);
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e) {

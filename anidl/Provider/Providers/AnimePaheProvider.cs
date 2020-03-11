@@ -83,14 +83,32 @@ namespace anidl.Provider.Providers {
                                         if (node.InnerText.Contains("eval(")) {
                                             string[] arr = node.InnerText.Split('\'');
                                             string src = GetKwikSource(arr[arr.Length - 4]);
+
+                                            // i dont know why but sometimes its this and sometimes its the other
+                                            src = src.Replace("https://eu3-10.nextstream.org", "https://eu3-files.nextstream.org");
+                                            src = src.Replace("iosNative://files-10.org.stream", "https://eu3-files.nextstream.org/stream");
+
+                                            // need to also fix the parameters (maybe the decryptor doesnt work properly?)
+                                            src = src.Replace("uwu/m3u8", "uwu.m3u8");
+                                            src = src.Replace(".token?", "?token=");
+
+                                            client.Headers["Referer"] = "https://kwik.cx/";
+                                            client.Headers.Add("Origin", "https://kwik.cx");
+
+                                            // still 403s
+                                            str = client.DownloadString(src);
+
+                                            Debug.WriteLine(str);
                                         }
                                     }
 
                                     break;
-                                } catch(WebException e) {
-                                    if(((HttpWebResponse)e.Response).StatusCode == HttpStatusCode.NotFound) {
-                                        continue;
-                                    } else {
+                                } catch (WebException e) {
+                                    try {
+                                        if (((HttpWebResponse)e.Response).StatusCode == HttpStatusCode.NotFound) {
+                                            continue;
+                                        }
+                                    } catch (Exception ex) {
                                         MessageBox.Show(e.Message);
                                     }
                                 }
