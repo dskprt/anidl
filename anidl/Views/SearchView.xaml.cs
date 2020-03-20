@@ -26,8 +26,6 @@ namespace anidl.Views {
         private void Search_Click(object sender, RoutedEventArgs e) {
             Provider.Provider provider = Provider.Provider.GetProviderByName(Utils.Settings.provider);
 
-            Debug.WriteLine(Utils.Settings.provider);
-
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
                     (window as MainWindow).MainContentControl.Content = new AnimeListView(provider.Search(aniname.Text));

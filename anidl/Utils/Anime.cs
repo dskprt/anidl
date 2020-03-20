@@ -10,9 +10,9 @@ namespace anidl.Utils {
 
         public string title;
         public string url;
-        public int id;
+        public object id;
 
-        public Anime(string title, string url, int id) {
+        public Anime(string title, string url, object id) {
             this.title = title;
             this.url = url;
             this.id = id;
@@ -24,9 +24,9 @@ namespace anidl.Utils {
             public string title;
             public int number;
             public string url;
-            public int id;
+            public object id;
 
-            public Episode(Anime anime, string title, int number, string url, int id) {
+            public Episode(Anime anime, string title, int number, string url, object id) {
                 this.anime = anime;
                 this.title = title;
                 this.number = number;

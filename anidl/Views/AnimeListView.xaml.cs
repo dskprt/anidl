@@ -32,7 +32,7 @@ namespace anidl.Views {
 
             public string Title { get; set; }
             public string URL { get; set; }
-            public int Id { get; set; }
+            public object Id { get; set; }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -41,7 +41,8 @@ namespace anidl.Views {
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
-                    (window as MainWindow).MainContentControl.Content = new DownloadView(provider.GetEpisodes(item.Id));
+                    (window as MainWindow).MainContentControl.Content = new DownloadView(provider.GetEpisodes(
+                        new Anime(item.Title, item.URL, item.Id)));
                 }
             }
         }

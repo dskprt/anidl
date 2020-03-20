@@ -28,18 +28,19 @@ namespace anidl.Views {
             InitializeComponent();
 
             foreach(Anime.Episode episode in episodes) {
-                this.episodes.Items.Add(new Item() { Anime = episode.anime.title, Title = episode.title,
+                this.episodes.Items.Add(new Item() { Parent = episode.anime, Anime = episode.anime.title, Title = episode.title,
                     URL = episode.url, Number = episode.number, Id = episode.id });
             }
         }
 
         public class Item {
 
+            public Anime Parent { get; set; }
             public string Anime { get; set; }
             public string Title { get; set; }
             public string URL { get; set; }
             public int Number { get; set; }
-            public int Id { get; set; }
+            public object Id { get; set; }
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e) {
@@ -48,31 +49,29 @@ namespace anidl.Views {
         }
 
         private void DLAll_Click(object sender, RoutedEventArgs e) {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            List<Anime.Episode> list = new List<Anime.Episode>();
 
             foreach(Item item in this.episodes.Items) {
-                dict.Add(string.Format("{0} #{1}{2}", item.Anime, item.Number, (string.IsNullOrWhiteSpace(item.Title)) ? "" : item.Title),
-                    item.URL);
+                list.Add(new Anime.Episode(item.Parent, item.Title, item.Number, item.URL, item.Id));
             }
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
-                    (window as MainWindow).MainContentControl.Content = new DownloaderView(dict);
+                    (window as MainWindow).MainContentControl.Content = new DownloaderView(list);
                 }
             }
         }
 
         private void DLChecked_Click(object sender, RoutedEventArgs e) {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            List<Anime.Episode> list = new List<Anime.Episode>();
 
             foreach (Item item in this.checkedItems) {
-                dict.Add(string.Format("{0} #{1}{2}", item.Anime, item.Number, (string.IsNullOrWhiteSpace(item.Title)) ? "" : item.Title),
-                    item.URL);
+                list.Add(new Anime.Episode(item.Parent, item.Title, item.Number, item.URL, item.Id));
             }
 
             foreach (Window window in Application.Current.Windows) {
                 if (window.GetType() == typeof(MainWindow)) {
-                    (window as MainWindow).MainContentControl.Content = new DownloaderView(dict);
+                    (window as MainWindow).MainContentControl.Content = new DownloaderView(list);
                 }
             }
         }

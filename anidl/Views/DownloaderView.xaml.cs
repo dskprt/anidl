@@ -22,11 +22,11 @@ namespace anidl.Views {
 
         private Provider.Provider provider = Provider.Provider.GetProviderByName(Settings.provider);
 
-        public DownloaderView(Dictionary<string, string> toDownload) {
+        public DownloaderView(List<Anime.Episode> toDownload) {
             InitializeComponent();
 
             foreach(var item in toDownload) {
-                provider.Download(item.Value);
+                provider.Download(item);
             }
         }
 
